@@ -1,4 +1,3 @@
-```markdown
 # Elevator_Model API
 
 ## Overview
@@ -49,7 +48,6 @@ This project implements a simplified elevator system using Django and Django RES
 - **POST `/api/elevators/{id}/move_down/`:** Move the elevator down to a specified floor.
 - **GET `/api/elevators/{id}/current_status/`:** Retrieve the current status of a specific elevator.
 
-... (Include additional endpoints as needed)
 
 ## Contributing
 
