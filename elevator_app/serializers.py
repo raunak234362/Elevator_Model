@@ -1,12 +1,7 @@
 from rest_framework import serializers
-from .models import Elevator,FloorRequest
+from elevator_app.models import Elevator
 
-class ElevatorSerializer(serializers.ModeSerializer):
+class ElevatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Elevator
         fields = ('__all__')
-
-class FloorRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FloorRequest
-        fields = '__all__'
