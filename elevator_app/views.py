@@ -50,30 +50,34 @@ class ElevatorViewSet(viewsets.ModelViewSet):
     def move_up(self, request, pk=None):
         elevator = self.get_object()
 
-        user_request = request.data.get('user_requests', [])
-        elevator.direction = 'up'
-        current_floor = elevator.current_floor
+        target_floor = request.data.get('target_floor')
+        
+        if target_floor is not None and target_floor > elevator.current_floor.number:
+            elevator.current_floor, created = Floor.objects.get_or_create(number=target_floor)
+            elevator.direction = 'up'
+            elevator.door_status = 'open' if target_floor == elevator.current_floor.number else 'closed'
+            elevator.save()
 
-        for user_req in user_request:
-            if user_req['floor'] == current_floor:
-                elevator.door_status = 'open'
-            else:
-                elevator.current_floor, created = Floor.objects.get_or_create(number=current_floor + 1)
-                elevator.direction = 'up'
-                elevator.save()
+            return Response({"message": f"Elevator is moving up to floor {target_floor}. Current floor: {elevator.current_floor}"})
+        else:
+            return Response({"message": "Invalid target floor for moving up."}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"message": f"Elevator is moving up. Current floor: {elevator.current_floor}"})
 
     def move_down(self, request, pk=None):
         elevator = self.get_object()
 
-        elevator.direction = 'down'
-        if elevator.current_floor.number > 1:
-            elevator.current_floor, created = Floor.objects.get_or_create(number=elevator.current_floor.number - 1)
+        target_floor = request.data.get('target_floor')
+        
+        if target_floor is not None and target_floor < elevator.current_floor.number:
+            elevator.current_floor, created = Floor.objects.get_or_create(number=target_floor)
+            elevator.direction = 'down'
+            elevator.door_status = 'open' if target_floor == elevator.current_floor.number else 'closed'
             elevator.save()
-            return Response({"message": f"Elevator is moving down to floor {elevator.current_floor}"})
+
+            return Response({"message": f"Elevator is moving down to floor {target_floor}. Current floor: {elevator.current_floor}"})
         else:
-            return Response({"message": "Elevator is already at the lowest floor."})
+            return Response({"message": "Invalid target floor for moving down."}, status=status.HTTP_400_BAD_REQUEST)
 
     def open_door(self, request, pk=None):
         elevator = self.get_object()

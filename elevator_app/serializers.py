@@ -9,5 +9,5 @@ class ElevatorSerializer(serializers.ModelSerializer):
 
 class FloorSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Floor
+        model= Floor
         fields = ('__all__')

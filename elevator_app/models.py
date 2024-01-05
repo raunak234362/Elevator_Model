@@ -10,8 +10,8 @@ class Floor(models.Model):
 class Elevator(models.Model):
     #This model represents an elevator in the building.
     id=models.AutoField(primary_key=True)
-    current_floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
-    user_requests = models.JSONField(default=list)
+    current_floor = models.ForeignKey(Floor, on_delete=models.CASCADE, related_name='current')
+    user_requests = models.ForeignKey(Floor, on_delete=models.CASCADE, related_name='request')
     operational=models.BooleanField(default=True)
 
     direction=models.CharField(max_length=10,choices=[
