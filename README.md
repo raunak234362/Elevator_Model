@@ -1,26 +1,61 @@
-# Elevator_Model API
+# Django Elevator System
 
-## Overview
+## Thought Process
 
-This project implements a simplified elevator system using Django and Django REST Framework. The elevator system can be initialized with multiple elevators and supports basic operations such as moving up and down, opening and closing doors, starting and stopping, and fetching the current status. Each elevator is associated with specific floors, and the system takes user requests into account for optimal elevator assignment.
+### Problem Statement
 
-## Features
+The goal is to implement a simplified elevator system using Django and Django REST Framework. Key features include elevator movement, door control, system initialization, and handling user requests for optimal elevator assignment.
 
-- **Move Up and Down:** Elevators can move between floors based on user requests.
-- **Open and Close Door:** Elevators can open and close doors.
-- **Start and Stop Running:** Elevators can start running in a specific direction or stop.
-- **Display Current Status:** Users can fetch the current status of each elevator.
-- **User Requests:** Elevators handle user requests for moving up or down.
-- **Elevator System Initialization:** Multiple elevators can be initialized in the system.
-- **Total Floors:** The system now tracks the total number of floors in the building.
+### Design Decisions
 
-## Setup
+1. **Architecture:**
+   - Django was chosen for its robustness in web development and the Django REST Framework for building APIs.
+   - Model-View-Controller (MVC) architectural pattern: Django's structure naturally aligns with MVC, providing clear separation of concerns.
+
+2. **Repository File Structure:**
+   - `elevator_system/`: Django project folder.
+   - `elevator/`: Django app for elevator-related models and views.
+   - `requirements.txt`: Lists project dependencies.
+
+3. **Database Modeling:**
+   - `Elevator` model includes `current_floor`, `direction`, `operational`, and `total_floors`.
+   - `Floor` model represents floors in the building.
+
+4. **Libraries and Plugins:**
+   - Django REST Framework: For building APIs efficiently.
+   - SQLite (default Django database): Simple and lightweight, suitable for development.
+
+## API Contracts
+
+### Elevator Endpoints
+
+- **GET `/api/elevators/`:**
+  - Retrieves a list of all elevators.
+
+- **POST `/api/elevators/`:**
+  - Initializes a new elevator.
+  - Payload: None.
+
+- **POST `/api/elevators/{id}/move_up/`:**
+  - Moves the elevator up to a specified floor.
+  - Payload: `{ "target_floor": 3 }`
+
+- **POST `/api/elevators/{id}/move_down/`:**
+  - Moves the elevator down to a specified floor.
+  - Payload: `{ "target_floor": 1 }`
+
+- **GET `/api/elevators/{id}/current_status/`:**
+  - Retrieves the current status of a specific elevator.
+
+### Setup, Deploy, and Test
+
+#### Setup
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/raunakd234362/Elevator_Model
-   cd Elevator_Model
+   git clone https://github.com/your-username/django-elevator-system.git
+   cd django-elevator-system
    ```
 
 2. Create a virtual environment and install dependencies:
@@ -40,28 +75,27 @@ This project implements a simplified elevator system using Django and Django RES
 
 4. Access the API at `http://localhost:8000/api/elevators/`.
 
-## API Endpoints
+#### Deploy
 
-- **GET `/api/elevators/`:** Retrieve a list of all elevators.
-- **POST `/api/elevators/`:** Initialize a new elevator.
-- **POST `/api/elevators/{id}/move_up/`:** Move the elevator up to a specified floor.
-- **POST `/api/elevators/{id}/move_down/`:** Move the elevator down to a specified floor.
-- **GET `/api/elevators/{id}/current_status/`:** Retrieve the current status of a specific elevator.
+1. Choose a production-ready database (e.g., PostgreSQL).
+2. Set environment variables for production settings (e.g., `DJANGO_SETTINGS_MODULE`).
+3. Configure a web server (e.g., Gunicorn) and a reverse proxy (e.g., Nginx).
 
+#### Testing
 
-## Contributing
+1. Run tests using Django's test runner:
 
-Contributions are welcome! Follow these steps:
+   ```bash
+   python manage.py test
+   ```
 
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/new-feature`.
-3. Commit your changes: `git commit -m 'Add new feature'`.
-4. Push to the branch: `git push origin feature/new-feature`.
-5. Open a pull request.
+2. Write additional tests for new features.
 
+## Conclusion
+
+The Django Elevator System project employs a straightforward design, utilizing Django and Django REST Framework for efficiency and maintainability. The project structure, database modeling, and API contracts are designed to be clear and scalable. Future improvements may include adding authentication, improving elevator movement logic, and enhancing error handling.
 
 
 # Screenshot
-<img width="960" alt="image" src="https://github.com/raunak234362/Elevator_Model/assets/64278503/20515b5b-e48e-42fd-9aa4-0847bf828692">
-<img width="725" alt="image" src="https://github.com/raunak234362/Elevator_Model/assets/64278503/1e0cde5f-bff1-4c1b-9399-13c59bfea259">
-
+![image](https://github.com/raunak234362/Elevator_Model/assets/64278503/544e3b7f-8501-49c6-9005-61201ac2f57f)
+![image](https://github.com/raunak234362/Elevator_Model/assets/64278503/ea8d6b68-2ac0-461d-a9cb-5b848a3cd61a)
