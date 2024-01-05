@@ -54,8 +54,8 @@ The goal is to implement a simplified elevator system using Django and Django RE
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/django-elevator-system.git
-   cd django-elevator-system
+   git clone https://github.com/raunak234362/Elevator_Model
+   cd Elevator_Model
    ```
 
 2. Create a virtual environment and install dependencies:
