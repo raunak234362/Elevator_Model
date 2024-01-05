@@ -59,3 +59,9 @@ Contributions are welcome! Follow these steps:
 4. Push to the branch: `git push origin feature/new-feature`.
 5. Open a pull request.
 
+
+
+# Screenshot
+<img width="960" alt="image" src="https://github.com/raunak234362/Elevator_Model/assets/64278503/20515b5b-e48e-42fd-9aa4-0847bf828692">
+<img width="725" alt="image" src="https://github.com/raunak234362/Elevator_Model/assets/64278503/1e0cde5f-bff1-4c1b-9399-13c59bfea259">
+
